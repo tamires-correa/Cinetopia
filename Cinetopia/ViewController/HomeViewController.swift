@@ -12,12 +12,14 @@ class HomeViewController: UIViewController {
     private lazy var logoImageView: UIImageView = {
         let logoImageView = UIImageView(image: UIImage.logo)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.contentMode = .scaleAspectFit
         return logoImageView
     }()
     
     private lazy var coupleImageView: UIImageView = {
         let coupleImage = UIImageView(image: UIImage.couple)
         coupleImage.translatesAutoresizingMaskIntoConstraints = false
+        coupleImage.contentMode = .scaleAspectFit
         return coupleImage
     }()
     
@@ -44,6 +46,15 @@ class HomeViewController: UIViewController {
         return button
     }()
     
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [logoImageView, coupleImageView, welcomeLabel, welcomeButton])
+        stackView.axis = .vertical
+        stackView.spacing = 32
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -57,23 +68,15 @@ class HomeViewController: UIViewController {
     }
     
     private func addSubviews() {
-        view.addSubview(logoImageView)
-        view.addSubview(coupleImageView)
-        view.addSubview(welcomeLabel)
-        view.addSubview(welcomeButton)
+        view.addSubview(stackView)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            coupleImageView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 32),
-            coupleImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            welcomeLabel.topAnchor.constraint(equalTo: coupleImageView.bottomAnchor, constant: 32),
-            welcomeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            welcomeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -64),
             
             welcomeButton.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 32),
             welcomeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 64),

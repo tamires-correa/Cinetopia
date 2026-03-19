@@ -15,7 +15,7 @@ class MoviesViewController: UIViewController{
         tableView.backgroundColor = .clear
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "movieCell")
+        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "movieCell")
         return tableView
     }()
     

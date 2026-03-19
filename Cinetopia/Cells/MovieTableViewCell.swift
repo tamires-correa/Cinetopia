@@ -13,7 +13,8 @@ class MovieTableViewCell: UITableViewCell {
         let moviePoster = UIImageView(image: UIImage.avatar)
         moviePoster.translatesAutoresizingMaskIntoConstraints = false
         moviePoster.layer.cornerRadius = 12
-        moviePoster.contentMode = .scaleAspectFit
+        moviePoster.contentMode = .scaleAspectFill
+        moviePoster.layer.masksToBounds = true
         return moviePoster
     }()
     
@@ -48,7 +49,7 @@ class MovieTableViewCell: UITableViewCell {
             moviePosterImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
             moviePosterImageView.widthAnchor.constraint(equalToConstant: 100),
             
-            movieTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            movieTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -16),
             movieTitleLabel.leadingAnchor.constraint(equalTo: moviePosterImageView.trailingAnchor, constant: 16),
             
             movieReleaseDataLabel.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor, constant: 8),

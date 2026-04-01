@@ -10,7 +10,7 @@ import UIKit
 class MovieTableViewCell: UITableViewCell {
     
     private lazy var moviePosterImageView: UIImageView = {
-        let moviePoster = UIImageView(image: UIImage.avatar)
+        let moviePoster = UIImageView()
         moviePoster.translatesAutoresizingMaskIntoConstraints = false
         moviePoster.layer.cornerRadius = 12
         moviePoster.contentMode = .scaleAspectFill
@@ -21,7 +21,7 @@ class MovieTableViewCell: UITableViewCell {
     private lazy var movieTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Avatar"
+        label.numberOfLines = 0
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = .white
         return label
@@ -30,11 +30,16 @@ class MovieTableViewCell: UITableViewCell {
     private lazy var movieReleaseDataLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Lançamento: 18/12/2009"
         label.font = .systemFont(ofSize: 18)
         label.textColor = .white.withAlphaComponent(0.75)
         return label
     }()
+    
+    func configureCell(movie: Movie){
+        movieTitleLabel.text = movie.title
+        moviePosterImageView.image = UIImage(named: movie.image)
+        movieReleaseDataLabel.text = "Lançamento: \(movie.releaseDate)"
+    }
     
     private func addSubviews() {
         addSubview(moviePosterImageView)
@@ -51,6 +56,7 @@ class MovieTableViewCell: UITableViewCell {
             
             movieTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -16),
             movieTitleLabel.leadingAnchor.constraint(equalTo: moviePosterImageView.trailingAnchor, constant: 16),
+            movieTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
             movieReleaseDataLabel.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor, constant: 8),
             movieReleaseDataLabel.leadingAnchor.constraint(equalTo: moviePosterImageView.trailingAnchor, constant: 16)
@@ -80,6 +86,6 @@ class MovieTableViewCell: UITableViewCell {
     }
 }
 
-#Preview{
-    MovieTableViewCell()
-}
+//#Preview{
+//    MovieTableViewCell()
+//}

@@ -30,9 +30,18 @@ class MoviesViewController: UIViewController{
     private func setupNavigationBar() {
         title = "Filmes populares"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor.white
-        ]
-        navigationItem.setHidesBackButton(true, animated: true)
+        
+        let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            appearance.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: UIColor.white,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 28, weight: .bold)
+            ]
+        
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+          
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Filmes Populares", style: .plain, target: nil, action: nil)
     }
     
     

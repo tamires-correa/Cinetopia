@@ -9,12 +9,13 @@ import UIKit
 
 extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        movies.count
+        isSearchActive ? filteredMovies.count : movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath) as? MovieTableViewCell {
-            cell.configureCell(movie: movies[indexPath.row])
+            let movie = isSearchActive ? filteredMovies[indexPath.row] : movies[indexPath.row]
+            cell.configureCell(movie: movie)
             cell.selectionStyle = .none
             return cell
         }
@@ -23,7 +24,8 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let detailsVC = MovieDetailsViewController(movieDetail: movies[indexPath.row])
+        let movie = isSearchActive ? filteredMovies[indexPath.row] : movies[indexPath.row]
+        let detailsVC = MovieDetailsViewController(movieDetail: movie)
         navigationController?.pushViewController(detailsVC, animated: true)
     }
     
@@ -31,3 +33,18 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
         return 160
     }
 }
+
+extension MoviesViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            isSearchActive = false
+        } else {
+            isSearchActive = true
+            filteredMovies = movies.filter({ movie in
+                movie.title.lowercased().contains(searchText.lowercased())
+            })
+        }
+        self.tableView.reloadData()
+    }
+}
+

@@ -8,8 +8,11 @@
 import UIKit
 
 class MoviesViewController: UIViewController{
-
-    private lazy var tableView: UITableView = {
+    
+    var filteredMovies : [Movie] = []
+    var isSearchActive : Bool = false
+    
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
@@ -17,6 +20,17 @@ class MoviesViewController: UIViewController{
         tableView.delegate = self
         tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "movieCell")
         return tableView
+    }()
+    
+    private lazy var searchBar:  UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString (string: "Pesquisar...", attributes: [.foregroundColor: UIColor.lightGray])
+        searchBar.searchTextField.leftView?.tintColor = .lightGray
+        searchBar.searchTextField.backgroundColor = .white
+        searchBar.searchTextField.textColor = .black
+        searchBar.delegate = self
+        return searchBar
     }()
     
     override func viewDidLoad() {
@@ -42,6 +56,7 @@ class MoviesViewController: UIViewController{
         navigationItem.scrollEdgeAppearance = appearance
           
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Filmes Populares", style: .plain, target: nil, action: nil)
+        navigationItem.titleView = searchBar
     }
     
     

@@ -107,16 +107,6 @@ class MovieDetailsViewController: UIViewController {
             movieDescriptionLabelDetailView.topAnchor.constraint(equalTo: movieRateLabelDetailView.bottomAnchor, constant: 25),
             movieDescriptionLabelDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             movieDescriptionLabelDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
-//            moviePosterDetailView.widthAnchor.constraint(equalToConstant: 100),
-            //
-            //            movieTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -16),
-            //            movieTitleLabel.leadingAnchor.constraint(equalTo: moviePosterImageView.trailingAnchor, constant: 16),
-            //            movieTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            //
-            //            movieReleaseDataLabel.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor, constant: 8),
-            //            movieReleaseDataLabel.leadingAnchor.constraint(equalTo: moviePosterImageView.trailingAnchor, constant: 16)
-            //
         ])
     }
 }

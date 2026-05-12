@@ -89,3 +89,15 @@ fastlane/test_output
 iOSInjectionProject/
 
 # End of https://www.toptal.com/developers/gitignore/api/swift
+
+# Node (para o json-server)
+node_modules/
+npm-debug.log*
+.eslintcache
+
+
+# Pasta da API de Filmes
+movie-api-main/node_modules/
+
+# Caso você tenha instalado algo na raiz também
+node_modules/

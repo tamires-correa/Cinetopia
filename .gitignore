@@ -98,6 +98,5 @@ npm-debug.log*
 
 # Pasta da API de Filmes
 movie-api-main/node_modules/
-
-# Caso você tenha instalado algo na raiz também
+movie-api-main/README.md
 node_modules/
